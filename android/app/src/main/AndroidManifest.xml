@@ -22,5 +22,8 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+       <activity
+        android:name="com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 </manifest>

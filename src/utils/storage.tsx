@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export async function getOnboardingItem(paramName: any) {
   const value = await AsyncStorage.getItem(paramName);
+  console.log('getOnboardingItem', value);
   return value ? JSON.parse(value) : null;
 }
 

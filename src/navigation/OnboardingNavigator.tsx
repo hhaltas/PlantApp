@@ -13,8 +13,11 @@ const Stack = createNativeStackNavigator();
 
 const OnboardingNavigator = (props: Props) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Onboarding" component={CategoriesScreen} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
     </Stack.Navigator>
   );
 };
