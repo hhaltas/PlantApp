@@ -26,6 +26,7 @@ const RootNavigator = () => {
     <Provider store={store}>
       <RootStack.Navigator
         initialRouteName={isOnboarding ? 'Home' : 'Onboarding'}
+        testID="root-navigator"
         screenOptions={{
           headerShown: false,
         }}>
