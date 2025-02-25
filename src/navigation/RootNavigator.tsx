@@ -14,7 +14,6 @@ const RootNavigator = () => {
 
   const checkOnboardingStatus = async () => {
     const data = await getOnboardingItem('onBoarding');
-    console.log('RootNavigator getOnboardingItem', data);
     setIsOnboarding(data);
   };
 

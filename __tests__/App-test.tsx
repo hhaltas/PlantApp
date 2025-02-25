@@ -1,14 +1,57 @@
-/**
- * @format
- */
+import * as React from 'react';
+import {screen, render, fireEvent} from '@testing-library/react-native';
 
-import 'react-native';
-import React from 'react';
 import App from '../App';
+import axios from 'axios';
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+jest.mock('../src/utils/storage', () => ({
+  getOnboardingItem: jest.fn(),
+}));
+
+jest.mock('@react-navigation/native', () => {
+  return {
+    NavigationContainer: ({children}) => <>{children}</>,
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: jest.fn(),
+  };
+});
+
+jest.mock('@react-navigation/native-stack', () => {
+  return {
+    createNativeStackNavigator: () => {
+      return {
+        Navigator: ({children}) => <>{children}</>,
+        Screen: ({name, component}) => <component />,
+      };
+    },
+  };
+});
+
+jest.mock('@react-navigation/bottom-tabs', () => {
+  return {
+    createBottomTabNavigator: () => {
+      return {
+        Navigator: ({children}) => <>{children}</>,
+        Screen: ({name, component}) => <component />,
+      };
+    },
+  };
+});
+
+// LinearGradient mock'ı yukarıda tanımlandığı için burada tekrar gerek yok
+// jest.mock('react-native-linear-gradient'); // Bu satırı kaldırabilirsiniz
+
+// AsyncStorage mock'ı yukarıda tanımlandığı için burada tekrar gerek yok
+// jest.mock('@react-native-async-storage/async-storage'); // Bu satırı kaldırabilirsiniz
+
+describe('App Component', () => {
+  it('renders correctly', () => {
+    const {toJSON} = render(<App />);
+
+    // App bileşeninin render edildiğini doğrula
+    expect(toJSON()).toBeTruthy();
+  });
 });
