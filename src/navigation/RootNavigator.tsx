@@ -10,7 +10,7 @@ import {getOnboardingItem} from '../utils/storage';
 const RootStack = createNativeStackNavigator();
 
 const RootNavigator = () => {
-  const [isOnboarding, setIsOnboarding] = useState(true);
+  const [isOnboarding, setIsOnboarding] = useState(false);
 
   const checkOnboardingStatus = async () => {
     const data = await getOnboardingItem('onBoarding');
@@ -24,7 +24,7 @@ const RootNavigator = () => {
   return (
     <Provider store={store}>
       <RootStack.Navigator
-        initialRouteName={isOnboarding ? 'Home' : 'Onboarding'}
+        initialRouteName={isOnboarding !== null ? 'Home' : 'Onboarding'}
         testID="root-navigator"
         screenOptions={{
           headerShown: false,
